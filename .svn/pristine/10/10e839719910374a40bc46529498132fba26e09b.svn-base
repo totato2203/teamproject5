@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="teamproject5.a01_Jangho.a03_DAO.JanghoDao">
+	<select id="getFreeBoardList" resultType="freeboard">
+		select *
+		from freeBoard
+		WHERE 1=1
+		<if test="freeTitle != null">
+			AND freeTitle LIKE '%' || #{freeTitle} || '%'
+		</if>
+		<if test="freeWriter != null">
+			AND freeWriter LIKE '%' || #{freeWriter} || '%'
+		</if>
+		order by regdte desc
+	</select>
+	<insert id="insertFreeBoard" parameterType="freeboard">
+		insert into freeBoard
+			values(freeBoard_seq.nextval, #{freeTitle}, #{freeWriter}, 0, sysdate, sysdate, #{freeContent})
+	</insert>
+	<select id="getFreeBoardDetail" resultType="freeboard" parameterType="int">
+		select *
+		from freeBoard
+		where freeNum = #{freeNum}
+	</select>
+	<update id="readCountup" parameterType="int">
+		update freeBoard
+			set readcnt = readcnt + 1
+		where freeNum = #{freeNum}
+	</update>
+	<update id="updateFreeBoard" parameterType="freeboard">
+		UPDATE freeBoard
+			SET freeTitle = #{freeTitle}, 
+				freeContent = #{freeContent},
+				uptdte = sysdate
+		WHERE freeNum = #{freeNum}
+	</update>
+	<delete id="deleteFreeBoard" parameterType="int">
+		delete from freeBoard
+		where freeNum = #{freeNum}
+	</delete>
+	
+</mapper>
