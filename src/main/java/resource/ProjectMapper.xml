@@ -6,12 +6,22 @@
 	<select id="getFreeBoardList" resultType="freeboard" parameterType="freeboard">
 		select *
 		from freeBoard
-		WHERE 1=1
-		<if test="freeTitle != null">
-			AND freeTitle LIKE '%' || #{freeTitle} || '%'
-		</if>
-		<if test="freeWriter != null">
-			AND freeWriter LIKE '%' || #{freeWriter} || '%'
+		<if test="searchWord != null and searchWord !=''">
+			<choose>
+				<when test="searchType == 'freeTitle'">
+					where freeTitle LIKE '%' || #{searchWord} || '%'
+				</when>
+				<when test="searchType == 'freeWriter'">
+					where freeWriter LIKE '%' || #{searchWord} || '%'
+				</when>
+				<when test="searchType == 'freeContent'">
+					where freeContent LIKE '%' || #{searchWord} || '%'
+				</when>
+				<when test="searchType == 'freeTitleContent'">
+					where freeTitle LIKE '%' || #{searchWord} || '%'
+					OR freeContent LIKE '%' || #{searchWord} || '%'
+				</when>
+			</choose>
 		</if>
 		order by regdte desc
 	</select>
@@ -29,6 +39,11 @@
 			set readcnt = readcnt + 1
 		where freeNum = #{freeNum}
 	</update>
+	<select id="getFreeBoardDetailUpdate" resultType="freeboard" parameterType="int">
+		select *
+		from freeBoard
+		where freeNum = #{freeNum}
+	</select>
 	<update id="updateFreeBoard" parameterType="freeboard">
 		UPDATE freeBoard
 			SET freeTitle = #{freeTitle}, 

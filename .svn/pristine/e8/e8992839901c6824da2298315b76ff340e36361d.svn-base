@@ -1,0 +1,90 @@
+-- 회원정보 테이블 생성
+CREATE TABLE MEMBER (
+	id varchar2(50) PRIMARY KEY,
+	password varchar2(50) NOT NULL,
+	mname varchar2(50) NOT NULL,
+	phoneNum varchar2(50) NOT NULL,
+	email varchar2(50) NOT NULL,
+	point NUMBER,
+	paypassword char(6)
+)
+
+-- 자유게시판 테이블 생성
+CREATE TABLE freeBoard(
+	freeNum NUMBER PRIMARY KEY,
+	freeTitle varchar2(50) NOT NULL,
+	freeContent varchar2(1000) NOT NULL,
+	freeDate DATE NOT NULL,
+	mname varchar2(50) NOT NULL
+)
+
+-- 물품 테이블 생성
+CREATE TABLE product(
+	productNum NUMBER PRIMARY KEY,
+	pname varchar2(50) NOT NULL,
+	price NUMBER NOT NULL,
+	cnt NUMBER NOT NULL
+);
+CREATE SEQUENCE product_seq
+	INCREMENT BY 1
+	START WITH 1000
+	MAXVALUE 9999
+	MINVALUE 1000
+	cache 2;
+
+INSERT INTO product values(product_seq.nextval, '사과', 2000, 5);
+
+DROP TABLE product;
+
+SELECT * FROM product;
+
+-- 주문 테이블 생성
+CREATE TABLE orderTable(
+	productNum number,
+	id varchar2(50),
+	cnt number
+);
+
+-- 문제정답테이블 생성
+CREATE TABLE quiz(
+	quizId varchar2(5) PRIMARY KEY,
+	problem varchar2(1000) NOT NULL,
+	ans varchar2(1000) NOT NULL,
+	cag_id varchar2(5) NOT NULL,
+	ans_num varchar2(5) NOT NULL
+);
+-- 카테고리테이블 생성
+CREATE TABLE category(
+	cag_id varchar2(5) PRIMARY KEY,
+	cag_name varchar2(50) NOT NULL
+);
+
+INSERT INTO quiz values(12341,'지구는 온도가 어느정도 상승하거나 하강하여도 결국 정상으로 돌아오게 되는 항상성을 유지하고 있습니다. 하지만 과도한 탄소배출로 인해서
+   그 기능이 약화되기 시작하였습니다. 2021년 기준 인류는 지구의 온도를 정해진 만큼 줄이지 못한다면 지구는 항상성을 잃고 온난화는 더욱 가속될
+   것입니다. 여기서 인류가 낮춰야 하는 온도는 몇도일까요? ','1.5도',10,1);
+INSERT INTO quiz values(12345,'앞서 이야기했듯이 지구의 온도를 낮추지 않는다면 돌이킬수 없는 상황이 다가오게 됩니다. 
+                        하지만 이것마저 지켜야 하는 마지노선이 존재하고 있습니다.
+                         2022년 기준 기후 변화에 관한 정부간 협의체인 IPCC에서는 **개월 안에 이상 기후 대책을 내지 않으면 기상이변을 돌이킬수 없다고 합니다.
+                        **의 개월수는 얼마일까요? ','30개월',10,2);                     
+INSERT INTO quiz values(12346,'2021년 3월 31일 미국 항공우주국(NASA)에 따르면 21일 기준 북극해 위에 떠 있는 해빙 최대범위가 2007년과 동일한 기록인 역사상 7번째로 낮은 값에 도달했다고 합니다. 보고서에 따르면 21일 도달한 북극 해빙 최대범위는 1,477만㎢로 1981년에서 2010년 평균 최대범위인 1,564만㎢보다 87만㎢ 낮고 최저범위인 1,441만㎢보다 36만㎢ 높다고 하는데 손실된 해빙의 면적은 우리나라 면적의 몇배 일까요?','8배',10,3);
+INSERT INTO quiz values(12347,'구 온난화로 인해서 현재 해수면은 비약적으로 상승하고 있습니다. 이에 따라 전세계의 국가들은 저지대가 침수되는 문제를 해결하기 위해서 고민하고 있습니다. 특히나 한반도의 경우는 해수면이 1.1미터만 상승하여도 일부 도시가 바다에 침수될 가능성이 높은 가운데 서해안과 남해안 부근은 모두 침수될것이라는 분석이 보고 되고 있습니다. 이와 같이 전 세계중 해수면이 크게 오름으로써 큰 피해를 입게 되는 나라 는 어디일까요?','인도네시아',10,4);
+INSERT INTO quiz values(12348,'지구온난화 심화됨에 따라 해수온은 자연스럽게 상승하고 있습니다. 해수온이 상승함에 따라서 바다를 터전으로 살고 있는 생물들이 멸종해가고 있는 와중 산호초의 경우에는 2009년부터 2018년까지 전세계의 모든 산호초중 14%가 멸종했다고 보고 되었습니다. 이에 따라서 생태계의 터전 역할을 하던 산호초가 사라지자 여러 생물들이 함께 사라지고 있는것을 관찰할수 있었습니다. 2021년 기준으로 1950년 대비 전 세계 어획량은 60%가 감소하였는데 지금과 같이 온도가 꾸준히 상승하여 산호초의 생태계가 완전히 망가지게 되려면 얼마만큼의 시간이 걸릴까요?','50년',10,5);
+INSERT INTO QUIZ VALUES(12343,'탄소중립을 실천하는 것에는 여러가지가 있습니다. 보기의 예시중 국가차원에서 이루어지고 있는 탄소중립은
+                     무엇일까요?','탄소배출권',20,1);
+INSERT INTO quiz values(12344,'탄소중립을 가정속에서 실천하기 위한 것들은 크게 에너지,수송,소비,자원순환등의 분야로 나누어져있습니다.
+                  여기서 에너지 분야에 속하지 않는 것은 무엇일까요?','전기수소자동차구매하기',30,1);
+
+INSERT INTO category values('10','탄소중립의 중요성');
+INSERT INTO category values('20','국가간 탄소중립 전략');
+INSERT INTO category values('30','가정속의 탄소중립');
+
+SELECT * FROM quiz;
+SELECT * FROM category;
+
+DROP TABLE quiz;
+DROP TABLE category;
+
+DELETE quiz
+WHERE quizid =12342;
+
+

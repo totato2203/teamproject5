@@ -1,0 +1,52 @@
+package teamproject5.a01_Haeun.Service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import gamtan.dao.MemberDao;
+import gamtan.dao.VideoDao;
+import gamtan.vo.Member;
+import gamtan.vo.Video;
+
+@Service
+public class GamtanService {
+	@Autowired(required = false)
+	private VideoDao daoVideo;
+	
+	@Autowired(required = false)
+	private MemberDao daoMember;
+	
+	public List<Video> getVideoList(Video sch){
+		return daoVideo.getVideoList(sch);
+	}
+	
+	//public List<Video> getVideoListPubdate(Video sch);
+	public List<Video> getVideoListPubdate(Video sch){
+		return daoVideo.getVideoListPubdate(sch);
+	}
+	
+	//public List<Video> getVideoListClickCnt(Video sch);
+	public List<Video> getVideoListClickCnt(Video sch){
+		return daoVideo.getVideoListClickCnt(sch);
+	}
+	
+	public Video getVideoDetail(String title) {
+		daoVideo.readCountup(title);
+		return daoVideo.getVideoDetail(title);
+	}
+	
+	public boolean login(String id, String pw) {
+		return daoMember.login(id, pw);
+	}
+	
+	// test
+	public Member getSelectOne(Member member) throws Exception{
+		return daoMember.getSelectOne(member);
+	}
+
+
+	
+	
+}

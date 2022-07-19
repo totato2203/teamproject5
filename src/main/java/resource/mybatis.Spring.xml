@@ -4,6 +4,10 @@
 <configuration>
 	<typeAliases>
 		<typeAlias alias="freeboard" type="teamproject5.a01_Jangho.a04_VO.FreeBoard"/>
+		<typeAlias alias="video" type="teamproject5.a01_Haeun.VO.Video"/>
+		<typeAlias alias="cag" type="teamproject5.a01_sechan.vo.category"/>
+		<typeAlias alias="qz" type="teamproject5.a01_sechan.vo.quiz"/>
+		<typeAlias alias="member" type="teamproject5.a01_Haeun.VO.Member"/>
 	</typeAliases>
 	<!-- 사용할 sql 파일 처리
 		업무별 기능 분류로 sql 파일을 분리시켜서 처리
@@ -12,5 +16,8 @@
 	-->
 	<mappers>
 		<mapper resource="resource/ProjectMapper.xml"/>
+		<mapper resource="resource/gamtanMapper.xml"/>
+        <mapper resource="resource/memberMapper.xml"/>
+        <mapper resource="resource/boardMapper.xml"/>
 	</mappers>
 </configuration>

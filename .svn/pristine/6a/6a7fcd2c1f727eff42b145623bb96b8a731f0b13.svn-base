@@ -1,0 +1,12 @@
+package teamproject5.a01_Haeun.DAO;
+
+import gamtan.vo.Member;
+//gamtan.dao.MemberDao
+public interface MemberDao {
+	public boolean login(String id, String pw);
+
+	// test
+	public Member getSelectOne(Member member);
+	
+	
+}

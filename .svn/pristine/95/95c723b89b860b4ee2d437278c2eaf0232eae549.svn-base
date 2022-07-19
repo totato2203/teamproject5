@@ -1,0 +1,5 @@
+-- 7/19
+SELECT b.*, f.fname
+FROM board b, boardfile f
+WHERE b.NO = f.no(+)
+AND b.no = 5;
