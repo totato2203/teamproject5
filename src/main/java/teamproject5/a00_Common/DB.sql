@@ -42,12 +42,14 @@ AND pw =#{pw}
 
 -- 자유게시판 테이블 생성
 CREATE TABLE freeBoard(
-	freeNum NUMBER PRIMARY KEY,
-	freeTitle varchar2(50) NOT NULL,
-	freeContent varchar2(1000) NOT NULL,
-	freeDate DATE NOT NULL,
-	mname varchar2(50) NOT NULL
-)
+   freeNum NUMBER PRIMARY KEY,
+   freeTitle varchar2(50) NOT NULL,
+   freeWriter varchar2(50) NOT NULL,
+   readcnt NUMBER NOT NULL,
+   regdte DATE NOT NULL,
+   uptdte DATE NOT NULL,
+   freeContent varchar2(1000) NOT NULL
+);
 
 -- 물품 테이블 생성
 CREATE TABLE product(
@@ -218,3 +220,4 @@ WHERE title = '왜 우리는 기후 변화를 무서워하지 않을까?';
 UPDATE VIDEO 
 SET CLICKCNT = CLICKCNT + 1
 WHERE title = '왜 우리는 기후 변화를 무서워하지 않을까?';
+
